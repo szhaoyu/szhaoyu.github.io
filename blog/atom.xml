@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">面湖者 Blog</title>
+  <id>True/blog/atom.xml</id>
+  <updated>2018-12-19T00:00:00Z</updated>
+  <link href="True" />
+  <link href="True/blog/atom.xml" rel="self" />
+  <generator uri="http://ablog.readthedocs.org" version="0.9.3">ABlog</generator>
+  <entry xml:base="True/blog/atom.xml">
+    <title type="text">review hadoop architecture &amp; usage</title>
+    <id>True/hadoop-post/</id>
+    <updated>2018-12-19T00:00:00Z</updated>
+    <published>2018-12-19T00:00:00Z</published>
+    <link href="True/hadoop-post/" />
+    <author>
+      <name>Zhaoyu</name>
+    </author>
+    <content type="html">&lt;p&gt;Hadoop plateform includes HDFS and YARN two important modules.&lt;/p&gt;
+</content>
+  </entry>
+  <entry xml:base="True/blog/atom.xml">
+    <title type="text">MR vs SQL</title>
+    <id>True/mr-sql-post/</id>
+    <updated>2018-12-19T00:00:00Z</updated>
+    <published>2018-12-19T00:00:00Z</published>
+    <link href="True/mr-sql-post/" />
+    <author>
+      <name></name>
+    </author>
+    <content type="html">&lt;blockquote&gt;
+&lt;div&gt;&lt;p&gt;Map-Reduce framework or algrithm is good for indexing scraped web pages or proccessing server logs.&lt;/p&gt;
+&lt;p&gt;It’s proccess requirement is simple, but data scale is large.&lt;/p&gt;
+&lt;p&gt;But for complex structured data proccessing, hadoop’s map-reduce is little inefficent.&lt;/p&gt;
+&lt;p&gt;Hadoop’s working context is Input file and out file. RDBMS’s context is more than that, it used more memory to compute.&lt;/p&gt;
+&lt;p&gt;Here compare the function of Map-Reduce to SQL&lt;/p&gt;
+&lt;p&gt;Map function equals to SQL’s ‘where’ predictor.&lt;/p&gt;
+&lt;p&gt;Reduce function equals to SQL’s ‘group by’ operator.&lt;/p&gt;
+&lt;p&gt;And SQL has much more function semantics than hadoop’s single Map-Reduce algrithm.&lt;/p&gt;
+&lt;/div&gt;&lt;/blockquote&gt;
+</content>
+  </entry>
+  <entry xml:base="True/blog/atom.xml">
+    <title type="text">Connection between dockers accross different hosts</title>
+    <id>True/docker-network-post/</id>
+    <updated>2018-12-19T00:00:00Z</updated>
+    <published>2018-12-19T00:00:00Z</published>
+    <link href="True/docker-network-post/" />
+    <author>
+      <name></name>
+    </author>
+    <content type="html">&lt;blockquote&gt;
+&lt;div&gt;&lt;p&gt;Dockers in same host can ping each other by IP, because they all use the same network bridge.&lt;/p&gt;
+&lt;p&gt;How do dockers located on different hosts connect each other?&lt;/p&gt;
+&lt;ol class=&quot;arabic simple&quot;&gt;
+&lt;li&gt;bridge on same network field&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img alt=&quot;../_images/dockers-net.png&quot; src=&quot;../_images/dockers-net.png&quot; /&gt;
+&lt;p&gt;Host1 ： 10.211.55.3 eth0&lt;/p&gt;
+&lt;p&gt;Host2 ： 10.211.55.5 eth1&lt;/p&gt;
+&lt;div class=&quot;highlight-bash notranslate&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;apt-get install bridge-utils&lt;/p&gt;
+&lt;p&gt;Host1: $ sudo brctl addbr br0
+Host2: $ sudo brctl addbr br0&lt;/p&gt;
+&lt;p&gt;Host1: $ sudo ifconfig br0 10.211.55.10 netmask 255.255.255.0
+Host2: $ sudo ifconfig br0 10.211.55.20 netmask 255.255.255.0&lt;/p&gt;
+&lt;p&gt;Host1: $ sudo brctl addif br0 eth0
+Host2: $ sudo brctl addif br0 eth0&lt;/p&gt;
+&lt;dl class=&quot;docutils&quot;&gt;
+&lt;dt&gt;$sudo vim /etc/default/docker&lt;/dt&gt;
+&lt;dd&gt;Host1: DOCKER_OPTS=” -b=br0 –fixed-cidr=‘10.211.55.64/26‘ “
+Host2: DOCKER_OPTS=” -b=br1 –fixed-cidr=‘10.211.55.128/26‘ “&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;2. Open vSwitch
+requirements: two network-cards, Host-Only &amp;amp; NAT&lt;/p&gt;
+&lt;p&gt;3. weave
+requirements: two network-cards, Host-Only &amp;amp; NAT&lt;/p&gt;
+&lt;/div&gt;&lt;/blockquote&gt;
+</content>
+  </entry>
+  <entry xml:base="True/blog/atom.xml">
+    <title type="text">review javascript</title>
+    <id>True/js-post/</id>
+    <updated>2018-12-16T00:00:00Z</updated>
+    <published>2018-12-16T00:00:00Z</published>
+    <link href="True/js-post/" />
+    <author>
+      <name>Zhaoyu</name>
+    </author>
+    <content type="html">&lt;p&gt;Even forgotten some knowledges about pure javascript.&lt;/p&gt;
+</content>
+  </entry>
+  <entry xml:base="True/blog/atom.xml">
+    <title type="text">BI: 数据清洗、分析与报表工具</title>
+    <id>True/bi-tools/</id>
+    <updated>2015-05-01T00:00:00Z</updated>
+    <published>2015-05-01T00:00:00Z</published>
+    <link href="True/bi-tools/" />
+    <author>
+      <name>Zhaoyu</name>
+    </author>
+    <content type="html">&lt;p&gt;从技术角度来说 BI 包含了 ETL、DW、OLAP、DM等多环节。简单的说就是把交易系统已经发生过的数据，通过ETL工具抽取到主题明确的数据仓库中，OLAP后生成Cube或报表，透过Portal展现给用户，用户 利用这些经过分类、聚集、描述和可视化的数据，支持业务决策。&lt;/p&gt;
+</content>
+  </entry>
+  <entry xml:base="True/blog/atom.xml">
+    <title type="text">Google首席软件工程师Joshua Bloch谈如何设计一款优秀的API</title>
+    <id>True/api-design/</id>
+    <updated>2015-02-16T00:00:00Z</updated>
+    <published>2015-02-16T00:00:00Z</published>
+    <link href="True/api-design/" />
+    <author>
+      <name>Zhaoyu</name>
+    </author>
+    <content type="html">&lt;p&gt;API设计看似简单，其实里面的学问还不少，在整个设计流程中，一不小心就会陷入各种陷阱之中，给你带来后患无穷的危害。Joshua Bloch是Google的首席Java架构师，他在一篇PPT里向大家讲述了如何设计一款优秀的API。&lt;/p&gt;
+</content>
+  </entry>
+</feed>

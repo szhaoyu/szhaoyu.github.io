@@ -1,0 +1,340 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>review hadoop architecture &amp; usage &#8212; 面湖者  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about/" />
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+  
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  
+  <link rel="alternate" type="application/atom+xml"  href="../blog/atom.xml" title="面湖者 Blog">
+  
+  
+  <link href="True" rel="stylesheet">
+  
+  <style type="text/css">
+    ul.ablog-archive {list-style: none; overflow: auto; margin-left: 0px}
+    ul.ablog-archive li {float: left; margin-right: 5px; font-size: 80%}
+    ul.postlist a {font-style: italic;}
+    ul.postlist-style-disc {list-style-type: disc;}
+    ul.postlist-style-none {list-style-type: none;}
+    ul.postlist-style-circle {list-style-type: circle;}
+  </style>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="review-hadoop-architecture-usage">
+<h1>review hadoop architecture &amp; usage<a class="headerlink" href="#review-hadoop-architecture-usage" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Principle:</dt>
+<dd><p class="first">Hadoop plateform includes HDFS and YARN two important modules.</p>
+<p>HDFS includes NameNode, DataNode two roles, and for high availablity there is also a Secondary NameNode which is a hot backup.</p>
+<p>YARN includes ResourceManager, NodeManager. ResourceManager responsible for monitoring and scheduing computation resources. NodeManager responsible for negotiating with remote master.</p>
+<p>YARN provides MapReduce framework with Application Container.</p>
+<p>The proccess flow of Map-reduce:</p>
+<img alt="../_images/mr.png" src="../_images/mr.png" />
+<img alt="../_images/mr_scale.png" class="last" src="../_images/mr_scale.png" />
+</dd>
+</dl>
+</li>
+<li><p class="first">Usage</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><dl class="first docutils">
+<dt>hadoop startup or shutdown</dt>
+<dd>hdfs namenode -format
+sbin/hadoop-daemon.sh start namenode
+sbin/hadoop-daemon.sh start secondarynamenode
+sbin/hadoop-daemon.sh start DataNode
+sbin/yarn-daemon.sh start resourcemanager
+sbin/yarn-daemon.sh start nodemanager</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>monitoring WebUI</dt>
+<dd><a class="reference external" href="http://127.0.0.1:50070/dfshealth.html#tab-overview">http://127.0.0.1:50070/dfshealth.html#tab-overview</a>
+<a class="reference external" href="http://127.0.0.1:8088/cluster">http://127.0.0.1:8088/cluster</a></dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>hdfs</dt>
+<dd>hadoop fs -ls
+hadoop fs -rm -r test
+hadoop fs -cat test/part-r-00000  | less
+hadoop fs -put files/file1.txt test/</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>yarn</dt>
+<dd>yarn jar xxxx.xxx.AppYY.jar &lt;input&gt; &lt;output&gt;</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p class="first">points</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><dl class="first docutils">
+<dt>Mapper read file format</dt>
+<dd>key: line number or index number of text line
+value: line’s content</dd>
+</dl>
+</li>
+<li>reserve order of output key</li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>public static class CustomTextComparator implements RawComparator {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>public int compare(WritableComparable a, WritableComparable b) {</dt>
+<dd><p class="first last">return b.compareTo(a);</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>public int compare(Object a, Object b) {</dt>
+<dd><p class="first last">return this.compare((WritableComparable)a, (WritableComparable)b);</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>public int compare(byte[] b1, int s1, int l1, byte[] b2, int s2, int l2) {</dt>
+<dd><p class="first last">return WritableComparator.compareBytes(b2, s2, l2, b1, s1, l1);</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+<p>job.setSortComparatorClass(CustomTextComparator.class);</p>
+</div></blockquote>
+</li>
+</ol>
+</div>
+
+  <div class="section">
+  
+    
+
+
+<div class="section">
+  <span style="float: left;">
+  
+  
+  <a href="../mr-sql-post/">
+    <i class="fa fa-arrow-circle-left"></i>
+    MR vs SQL
+  </a>
+  
+  </span>
+  <span>&nbsp;</span>
+  <span style="float: right;">
+  
+</div>
+
+  
+  
+  </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../">面湖者</a></h1>
+
+
+
+
+
+
+
+
+
+  
+  
+  <h2>
+  
+  <i class="fa fa-calendar"></i>
+    19 December 2018
+  
+  </h2>
+
+  <ul>
+    
+
+  
+  <li id="author"><span><i class="fa-fw fa fa-user"></i></span>
+    
+      
+      <a href="../blog/author/zhaoyu/">Zhaoyu</a>
+      
+    </li>
+  
+
+  
+
+  
+
+  
+
+  
+  <li id="tags"><span><i class="fa-fw fa fa-tag"></i></span>
+    
+      
+      <a href="../blog/tag/hadoop/">hadoop</a>
+      
+    </li>
+  
+  
+  </ul>
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/">About Zhaoyu</a></li>
+</ul>
+
+
+  <h3><a href="../blog/">Recent Posts</a></h3>
+  <ul>
+    
+    
+      <li><a href="../mr-sql-post/">19 December - MR vs SQL</a></li>
+    
+      <li><a href="../docker-network-post/">19 December - Connection between dockers accross different hosts</a></li>
+    
+      <li><a href="../js-post/">16 December - review javascript</a></li>
+    
+      <li><a href="../bi-tools/">01 May - BI: 数据清洗、分析与报表工具</a></li>
+    
+      <li><a href="../api-design/">16 February - Google首席软件工程师Joshua Bloch谈如何设计一款优秀的API</a></li>
+    
+  </ul>
+
+  <h3><a href="../blog/tag/">Tags</a></h3>
+  <style type="text/css">
+    ul.ablog-cloud {list-style: none; overflow: auto;}
+    ul.ablog-cloud li {float: left; height: 20pt; line-height: 18pt; margin-right: 5px;}
+    ul.ablog-cloud a {text-decoration: none; vertical-align: middle;}
+    li.ablog-cloud-1{font-size: 80%;}
+    li.ablog-cloud-2{font-size: 95%;}
+    li.ablog-cloud-3{font-size: 110%;}
+    li.ablog-cloud-4{font-size: 125%;}
+    li.ablog-cloud-5{font-size: 140%;}
+  </style>
+  <ul class="ablog-cloud">
+    
+      
+      <li class="ablog-cloud ablog-cloud-1">
+        <a href="../blog/tag/sql/">SQL</a></li>
+      
+    
+      
+      <li class="ablog-cloud ablog-cloud-1">
+        <a href="../blog/tag/api/">api</a></li>
+      
+    
+      
+      <li class="ablog-cloud ablog-cloud-1">
+        <a href="../blog/tag/bi/">bi</a></li>
+      
+    
+      
+      <li class="ablog-cloud ablog-cloud-1">
+        <a href="../blog/tag/docker/">docker</a></li>
+      
+    
+      
+      <li class="ablog-cloud ablog-cloud-5">
+        <a href="../blog/tag/hadoop/">hadoop</a></li>
+      
+    
+      
+      <li class="ablog-cloud ablog-cloud-1">
+        <a href="../blog/tag/javascript/">javascript</a></li>
+      
+    
+  </ul>
+
+  <h3><a href="../blog/category/">Categories</a></h3>
+  <ul>
+  
+    
+    <li><a href="../blog/category/docker/">docker (1)</a></li>
+    
+  
+  </ul>
+
+  <h3><a href="../blog/archive/">Archives</a></h3>
+  <ul>
+  
+    
+    <li><a href="../blog/2018/">2018 (4)</a></li>
+    
+  
+    
+    <li><a href="../blog/2015/">2015 (2)</a></li>
+    
+  
+  </ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search/" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Zhaoyu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/hadoop-post.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
