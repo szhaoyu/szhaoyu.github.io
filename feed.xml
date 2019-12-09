@@ -3,11 +3,38 @@
   <channel>
     <title>软件架构日志</title>
     <description>分布式计算，微服务架构，Serverless架构；代码重构，领域设计；NLP自然语言处理，知识图谱，机器学习，深度学习。</description>
-    <link>http://0.0.0.0:4000/</link>
-    <atom:link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 07 Dec 2019 19:49:17 +0800</pubDate>
-    <lastBuildDate>Sat, 07 Dec 2019 19:49:17 +0800</lastBuildDate>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Mon, 09 Dec 2019 12:21:37 +0800</pubDate>
+    <lastBuildDate>Mon, 09 Dec 2019 12:21:37 +0800</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>一种随机ID生成规则的分析及其影响</title>
+        <description>&lt;p&gt;生成6位唯一随机ID，其中包括4位0-9数字，2位26大写字母（排除I与O）。&lt;/p&gt;
+
+&lt;h2 id=&quot;表示范围&quot;&gt;表示范围&lt;/h2&gt;
+
+&lt;p&gt;排列组合表示范围：10&lt;em&gt;10&lt;/em&gt;10&lt;em&gt;10&lt;/em&gt;24*24 = 576万&lt;/p&gt;
+
+&lt;p&gt;能否满足需求呢？
+第一感觉好像500多万，大概是够了。但是仔细分析下，一个用户需要使用10个，则100万用户设计的容量要考虑位1000万。这样一对比，就发现这种规则根本就不够用。&lt;/p&gt;
+
+&lt;p&gt;解决办法：再扩展若干位字母。每扩展一位，表示范围能扩大24倍。&lt;/p&gt;
+
+&lt;h2 id=&quot;性能&quot;&gt;性能&lt;/h2&gt;
+
+&lt;p&gt;这种ID的生成，如果按照一定规律，由小到大生成，效率自然是最高的。但是，为了呈现出随机的特点，单单需要随机字符，随机顺序。这对ID的生成与保存要求就稍高了，需要在性能方面做尽量的优化。&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 09 Dec 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2019/12/09/talk-about-random-identity-id/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/12/09/talk-about-random-identity-id/</guid>
+        
+        <category>算法</category>
+        
+        
+      </item>
     
       <item>
         <title>Peter John Landin</title>
@@ -48,8 +75,8 @@ I am sure it will be an enjoyable read.&lt;/p&gt;
 
 </description>
         <pubDate>Fri, 13 Sep 2019 00:00:00 +0800</pubDate>
-        <link>http://0.0.0.0:4000/2019/09/13/peter-john-landin/</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/2019/09/13/peter-john-landin/</guid>
+        <link>http://localhost:4000/2019/09/13/peter-john-landin/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/09/13/peter-john-landin/</guid>
         
         <category>CS Idols</category>
         

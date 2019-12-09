@@ -11,16 +11,26 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="软件架构日志">
+    <meta property="og:title" content="一种随机ID生成规则的分析及其影响 - 软件架构日志">
     
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="遵循科学 谨以实践">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="生成6位唯一随机ID，其中包括4位0-9数字，2位26大写字母（排除I与O）。
+">
+    
+    <meta property="article:published_time" content="2019-12-09T00:00:00Z">
+    
+    
+    <meta property="article:author" content="zhaoyu">
+    
+    
+    <meta property="article:tag" content="算法">
+    
     
     <meta property="og:image" content="http://localhost:4000/img/avatar-exiu.jpg">
-    <meta property="og:url" content="http://localhost:4000/">
+    <meta property="og:url" content="http://localhost:4000/2019/12/09/talk-about-random-identity-id/">
     <meta property="og:site_name" content="软件架构日志">
     
-    <title>软件架构日志</title>
+    <title>一种随机ID生成规则的分析及其影响 - 软件架构日志</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -29,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/">
+    <link rel="canonical" href="http://localhost:4000/2019/12/09/talk-about-random-identity-id/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -60,7 +70,7 @@
 
     <!-- Navigation -->
 
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
 
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -163,127 +173,124 @@
 </script>
 
 
-    <!-- Page Header -->
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
 
 
 
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
 
+    
+</style>
 
+<header class="intro-header style-text" >
 
-
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="site-heading">
-        
-          <h1>软件架构日志</h1>
-          <span class="subheading">遵循科学 谨以实践</span>
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E7%AE%97%E6%B3%95" title="算法">算法</a>
+                        
+                    </div>
+                    <h1>一种随机ID生成规则的分析及其影响</h1>
+                    
+                    <h2 class="subheading">表达范围与性能考虑</h2>
+                    <span class="meta">Posted by zhaoyu on December 9, 2019</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
-        
 
-<!-- USE SIDEBAR -->
-    <!-- PostList Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                postlist-container
-            ">
-    			
-<div class="post-preview">
-    <a href="/2019/12/09/talk-about-random-identity-id/">
-        <h2 class="post-title">
-            一种随机ID生成规则的分析及其影响
-        </h2>
-        
-        <h3 class="post-subtitle">
-            表达范围与性能考虑
-        </h3>
-        
-        <div class="post-content-preview">
-            
-                生成6位唯一随机ID，其中包括4位0-9数字，2位26大写字母（排除I与O）。
 
-表示范围
 
-排列组合表示范围：1010101024*24 = 576万
 
-能否满足需求呢？
-第一感觉好像500多万，大概是够了。但是仔细分析下，一个用户需要使用10个，则100万用户设计的容量要考虑位1000万。这样一对比，就发现这种规则根本就不够用。
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-解决办法：再扩展若干位字母。每扩展一位，表示范围能扩大2...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by zhaoyu on December 9, 2019
-    </p>
-</div>
-<hr>
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-<div class="post-preview">
-    <a href="/2019/09/13/peter-john-landin/">
-        <h2 class="post-title">
-            Peter John Landin
-        </h2>
-        
-        <h3 class="post-subtitle">
-            「计算机科学偶像」- 彼得·约翰·兰丁
-        </h3>
-        
-        <div class="post-content-preview">
-            
+                <!-- Multi-Lingual -->
                 
-  
-    
-      
-        wiki
-        维基
-      
-    
-  
+
+				<p>生成6位唯一随机ID，其中包括4位0-9数字，2位26大写字母（排除I与O）。</p>
+
+<h2 id="表示范围">表示范围</h2>
+
+<p>排列组合表示范围：10<em>10</em>10<em>10</em>24*24 = 576万</p>
+
+<p>能否满足需求呢？
+第一感觉好像500多万，大概是够了。但是仔细分析下，一个用户需要使用10个，则100万用户设计的容量要考虑位1000万。这样一对比，就发现这种规则根本就不够用。</p>
+
+<p>解决办法：再扩展若干位字母。每扩展一位，表示范围能扩大24倍。</p>
+
+<h2 id="性能">性能</h2>
+
+<p>这种ID的生成，如果按照一定规律，由小到大生成，效率自然是最高的。但是，为了呈现出随机的特点，单单需要随机字符，随机顺序。这对ID的生成与保存要求就稍高了，需要在性能方面做尽量的优化。</p>
 
 
-I was long curious about how does λ calculus become the foundation of formalizaing programming languages. It’s strange that I haven’t look u...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Hux on September 13, 2019
-    </p>
-</div>
-<hr>
 
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/09/13/peter-john-landin/" data-toggle="tooltip" data-placement="top" title="Peter John Landin">
+                        Previous<br>
+                        <span>Peter John Landin</span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <hr style="visibility: hidden;">
 
-<!-- Pager -->
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
 
+                
+            </div>  
 
-    		</div>
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
 
 
 <section>
+    
+        <hr class="hidden-sm hidden-xs">
     
     <h5><a href="/archive/">FEATURED TAGS</a></h5>
     <div class="tags">
@@ -296,53 +303,6 @@ I was long curious about how does λ calculus become the foundation of formaliza
 </section>
 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-  <hr>
-  <h5><a href="/about/">ABOUT ME</a></h5>
-  <div class="short-about">
-    
-    <img src="/img/avatar-exiu.jpg" />
-    
-    
-    <p></p>
-    
-    <!-- SNS Link -->
-    
-
-
-<ul class="list-inline">
-
-
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://www.zhihu.com/people/sun-zhao-yu-67">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa  fa-stack-1x fa-inverse">知</i>
-      </span>
-    </a>
-  </li>
-  
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://github.com/szhaoyu">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-</ul>
-  </div>
-</section>
-
                 <!-- Friends Blog -->
                 
 <hr>
@@ -351,10 +311,69 @@ I was long curious about how does λ calculus become the foundation of formaliza
   
 </ul>
 
-    		</div>
-        
-	</div>
-</div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "szhaoyu";
+    var disqus_identifier = "/2019/12/09/talk-about-random-identity-id";
+    var disqus_url = "http://localhost:4000/2019/12/09/talk-about-random-identity-id/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
 
 
